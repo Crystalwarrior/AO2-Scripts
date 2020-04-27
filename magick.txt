@@ -1,0 +1,31 @@
+Crop to 256x192:
+magick mogrify -extent 256x192 -gravity Center -background none *.png
+Resize to 50%:
+magick mogrify -resize 50% -background none *.png
+
+Make buttons (PNG VERSION):
+On:
+magick mogrify -extract 38x38+107+70 -background purple -alpha remove -bordercolor white -border 1x1 -path emotions/on *.png
+Off:
+magick mogrify -colorspace Gray -extract 38x38+107+70 -colorspace RGB -background gray -alpha remove -bordercolor black -border 1x1 -path emotions/off *.png
+(...+107+70 are X and Y offsets, tweak these to get a more precise frame)
+
+
+Make buttons (GIF VERSION [change .gif to .apng for animated png]):
+On:
+magick mogrify -extract 38x38+107+70 -background purple -alpha remove -bordercolor white -border 1x1 -path emotions/on -format png *.gif[0]
+Off:
+magick mogrify -colorspace Gray -extract 38x38+107+70 -colorspace RGB -background gray -alpha remove -bordercolor black -border 1x1 -path emotions/off -format png *.gif[0]
+(...+107+70 are X and Y offsets, tweak these to get a more precise frame)
+
+Explanation:
+`magick`: initiates muh magic
+`mogrify`: this https://www.imagemagick.org/script/mogrify.php
+`-extract 38x38+107+70`: crop/"extract" a 38x38 square starting at position 107+70, X and Y values both start at 0 from the top left corner of the image
+`-background purple`: replace alpha color with purple
+`-alpha remove`: remove alpha color and get that chad bg in
+`-bordercolor white`: change border color to white
+`-border 1x1`: make the border size 1x1, it will change the resolution of the image outward (hence why we made a 38x38 square instead of 40x40)
+`-path emotions/on`: define a path to which we would export the processed image (note that this path must exist before you run the command)
+`-format png`: change the image to png
+`*.gif[0]`: perform operation on all .gif files named *(anything), [0] means take the first frame of every file
