@@ -31,7 +31,7 @@ if droppedFile:
                 File.write('  songs:\n')
                 print("Category: {}".format(line[:-1]))
                 current_category = line[:-1]
-            if line.lower().endswith(('.mp3', '.ogg')):
+            if line.lower().endswith(('.mp3', '.ogg', '.opus', '.wav')):
                 try:
                     # tag = TinyTag.get(line)
                     # duration = tag.duration
@@ -48,10 +48,19 @@ else:
     input("Writing all .ogg and .mp3 present in folder to music.yaml. Any subfolders will be made as new categories. Press ENTER to begin.")
 
     for f in os.scandir(os.getcwd()):
-        # if f.is_file():
-        #     if f.name.endswith(('.mp3', '.ogg')):
-        #         print('Music: ' + f.name)
-        if f.is_dir():
+        if f.is_file():
+            if current_category != 'Unsorted':
+                current_category = 'Unsorted'
+                File.write('- category: ==Unsorted==\n')
+                File.write('  songs:\n')
+            if f.name.lower().startswith('[mod]'):
+                continue
+            if f.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav')):
+                duration = -1
+                File.write('    - name: "{}"\n'.format(f.name))
+                File.write('      length: {}\n'.format(duration))
+                print("Name: {} Length: {}".format(f.name, duration))
+        elif f.is_dir():
             print('Folder: ' + f.path)
             File.write('- category: =={}==\n'.format(f.name))
             current_category = f.name
@@ -61,7 +70,7 @@ else:
                     print(song)
                     if song.name.lower().startswith('[mod]'):
                         continue
-                    if song.name.lower().endswith(('.mp3', '.ogg')):
+                    if song.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav')):
                         # tag = TinyTag.get(line)
                         # duration = tag.duration
                         duration = -1
@@ -74,22 +83,5 @@ else:
                         #     os.makedirs(Dir)
                         # copy2(song.path, '{}/{}'.format(Dir, song.name))
                         # print('{}/{}'.format(Dir, song.name))
-            
-# else:
-#     input("Writing all .ogg and .mp3 present in folder to music.yaml. Press ENTER to begin.")
-#     File.write('- category: --IMPORT--\n')
-#     File.write('  songs:\n')
-#     for song in os.listdir():
-#         try:
-#             print(song)
-#             if song.lower().startswith('[mod]'):
-#                 continue
-#             if song.lower().endswith(('.mp3', '.ogg')):
-#                 tag = TinyTag.get(song)
-#                 File.write('    - name: "{}"\n'.format(song))
-#                 File.write('      length: {}\n'.format(tag.duration))
-#                 print("Name: {} Length: {}".format(song, tag.duration))
-#         except:
-#             continue
 
 input("Done! Press ENTER to exit.")
