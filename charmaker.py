@@ -22,7 +22,7 @@ File.write('gender = {}\n'.format(input("Please input gender.")))
 folder_sort = input('Sort all the emotes into "(a)" "(b)" "anim" folders? (y/n)').lower() == 'y'
 
 input("Writing all images in folder to char.ini. Press ENTER to begin.")
-i = 0
+emote_number = 0
 string = ''
 timestring = ''
 
@@ -54,8 +54,8 @@ for v, emote in enumerate(idle_emotes):
 	print(f'{prefix} = {name}')
 
 	# update the index
-	if i < v:
-		i = v
+	if emote_number <= v:
+		emote_number = v+1
 
 # Move the talking anims into their folders
 for emote in talking_emotes:
@@ -78,27 +78,22 @@ for v, emote in enumerate(pre_emotes):
 		if not os.path.exists(Dir):
 			os.makedirs(Dir)
 		shutil.move('{}/{}'.format(directory, emote), '{}/{}'.format(Dir, emote))
+		pre_emotes[v] = f'{prefix}/{emote}'
 	print(f'{prefix} = {name}')
 
 	# update the index
-	if i < v:
-		i = v
+	if emote_number <= v:
+		emote_number = v+1
 
-print(i)
-for idx in range(0, i):
+print(emote_number)
+for idx in range(0, emote_number):
 	pre = '-'
-	talking = '-'
 	idle = '-'
 	if idx < len(idle_emotes):
 		emote = idle_emotes[idx]
 		if emote.lower().startswith('(a)'):
 			emote = emote[3:]
 		idle = emote[:emote.rfind('.')]
-	if idx < len(talking_emotes):
-		emote = talking_emotes[idx]
-		if emote.lower().startswith('(b)'):
-			emote = emote[3:]
-		talking = emote[:emote.rfind('.')]
 	if idx < len(pre_emotes):
 		emote = pre_emotes[idx]
 		pre = emote[:emote.rfind('.')]
@@ -108,24 +103,24 @@ for idx in range(0, i):
 			pre = '-'
 		else:
 			timestring += f'{pre} = 0\n'
-	name = idle.capitalize()
-	string += f'{idx+1} = {name}#{pre}#{talking}#{idle}#0#\n'
+	name = idle[idle.rfind('/')+1:].capitalize()
+	string += f'{idx+1} = {name}#{pre}#{idle}#0#\n'
 
 File.write('\n[Time]\n')
 File.write(timestring)
 File.write('\n')
 File.write('[Emotions]\n')
-File.write('number={}\n'.format(i))
+File.write('number={}\n'.format(emote_number))
 File.write(string)
 
 File.write('\n[SoundN]\n')
 a = 0
-while a < i:
+while a < emote_number:
 	a+=1
 	File.write('{} = 0\n'.format(a))
 File.write('\n[SoundT]\n')
 a = 0
-while a < i:
+while a < emote_number:
 	a += 1
 	File.write('{} = 0\n'.format(a))
 
