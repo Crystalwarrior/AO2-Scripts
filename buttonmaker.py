@@ -29,14 +29,14 @@ for line in droppedFile.readlines():
         if not is_int(lines[0]):
             continue
 
-        emote = lines[2].split('#')[2]
+        emote = line.split('#')[2]
         print(emote)
         for button in os.listdir():
             if button == emote + '.png':
                 os.rename(button, 'button{}_{}.png'.format(lines[0], state))
                 print('Made a new button for {}'.format(emote))
                 break
-        print('Currently on {}'.format(lines))
+        print('Currently on {}'.format(line))
     except:
         print("Excepted on line {}".format(line))
         continue
