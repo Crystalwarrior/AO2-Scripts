@@ -20,7 +20,7 @@ current_category = ""
 File.write('- replace: False #Whether or not to use this music list exclusively instead of trying to add it on top of server music\n')
 File.write('  use_unique_folder: True #If true, this music will be contained entirely within its own folder e.g. base/music/<yaml name>/*.mp3\n')
 if droppedFile:
-    input("Writing .ogg and .mp3 and categorizing them based on file argument to music.yaml. Press ENTER to begin.")
+    input("Writing .mp3, .ogg, .opus, .wav and .m4a and categorizing them based on file argument to music.yaml. Press ENTER to begin.")
     for line in droppedFile.readlines():
         try:
             line = line.rstrip()
@@ -31,7 +31,7 @@ if droppedFile:
                 File.write('  songs:\n')
                 print("Category: {}".format(line[:-1]))
                 current_category = line[:-1]
-            if line.lower().endswith(('.mp3', '.ogg', '.opus', '.wav')):
+            if line.lower().endswith(('.mp3', '.ogg', '.opus', '.wav', '.m4a')):
                 try:
                     # tag = TinyTag.get(line)
                     # duration = tag.duration
@@ -55,7 +55,7 @@ else:
                 File.write('  songs:\n')
             if f.name.lower().startswith('[mod]'):
                 continue
-            if f.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav')):
+            if f.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav', '.m4a')):
                 duration = -1
                 File.write('    - name: "{}"\n'.format(f.name))
                 File.write('      length: {}\n'.format(duration))
@@ -70,7 +70,7 @@ else:
                     print(song)
                     if song.name.lower().startswith('[mod]'):
                         continue
-                    if song.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav')):
+                    if song.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav', '.m4a')):
                         # tag = TinyTag.get(line)
                         # duration = tag.duration
                         duration = -1
