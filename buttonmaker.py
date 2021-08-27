@@ -26,14 +26,15 @@ for line in droppedFile.readlines():
         lines = line.rstrip().split(' ')
         if lines[0] in ('[SoundN]', '[SoundT]'):
             break
-        if not is_int(lines[0]):
+        num = lines[0].split('=')[0]
+        if not is_int(num):
             continue
 
         emote = line.split('#')[2]
         print(emote)
         for button in os.listdir():
             if button == emote + '.png':
-                os.rename(button, 'button{}_{}.png'.format(lines[0], state))
+                os.rename(button, 'button{}_{}.png'.format(num, state))
                 print('Made a new button for {}'.format(emote))
                 break
         print('Currently on {}'.format(line))
