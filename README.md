@@ -1,3 +1,5 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I51SHXD)
+
 All of the python scripts require Python version 3 and above.
 Image Magick is also reccomended for batch-cropping, resizing, button making, etc. magic.
 
