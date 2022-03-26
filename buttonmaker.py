@@ -33,7 +33,7 @@ for line in droppedFile.readlines():
         emote = line.split('#')[2]
         print(emote)
         for button in os.listdir():
-            if button == emote + '.png':
+            if button.lower() == emote.lower() + '.png':
                 os.rename(button, 'button{}_{}.png'.format(num, state))
                 print('Made a new button for {}'.format(emote))
                 break
