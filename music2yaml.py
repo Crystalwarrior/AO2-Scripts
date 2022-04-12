@@ -60,16 +60,15 @@ if use_lengths:
 
 File = open("music.yaml", "w")
 Err = open("music_errors.txt", "w")
-current_category = ""
 File.write('- replace: False #Whether or not to use this music list exclusively instead of trying to add it on top of server music\n')
 File.write('  use_unique_folder: True #If true, this music will be contained entirely within its own folder e.g. base/music/<yaml name>/*.mp3\n')
 
 
 def set_category(category_name):
-    current_category = category_name
-    File.write(f'- category: =={current_category}==\n')
+    File.write(f'- category: =={category_name}==\n')
     File.write('  songs:\n')
-    print(f'Current category: {current_category}')
+    print(f'Current category: {category_name}')
+    return category_name
 
 
 def add_song(song_name):
@@ -78,12 +77,16 @@ def add_song(song_name):
     if use_lengths:
         tag = TinyTag.get(song_name)
         duration = tag.duration
+    fname = song_name
+    if current_category != "Unsorted":
+        fname = current_category + "/" + song_name
     File.write(
-        '    - name: "{}"\n'.format(current_category + "/" + song_name))
+        '    - name: "{}"\n'.format(fname))
     File.write('      length: {}\n'.format(duration))
     print("Name: {} Length: {}".format(song_name, duration))
 
 
+current_category = ""
 if droppedFile:
     input("Writing .mp3, .ogg, .opus, .wav and .m4a and categorizing them based on file argument to music.yaml. Press ENTER to begin.")
     for line in droppedFile.readlines():
@@ -94,7 +97,7 @@ if droppedFile:
             if line.lower().endswith(('.mp3', '.ogg', '.opus', '.wav', '.m4a')):
                 try:
                     if line.lower().endswith(':') and current_category != line[:-1]:
-                        set_category(line[:-1])
+                        current_category = set_category(line[:-1])
                     add_song(line)
                 except:
                     Err.write('Error for {}\n'.format(line))
@@ -111,8 +114,7 @@ else:
                 continue
             if f.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav', '.m4a')):
                 if current_category != 'Unsorted':
-                    set_category('Unsorted')
-                duration = -1
+                    current_category = set_category('Unsorted')
                 add_song(f.name)
         elif f.is_dir():
             print('Folder: ' + f.path)
@@ -122,7 +124,7 @@ else:
                         continue
                     if song.name.lower().endswith(('.mp3', '.ogg', '.opus', '.wav', '.m4a')):
                         if current_category != f.name:
-                            set_category(f.name)
+                            current_category = set_category(f.name)
                         add_song(song.name)
 
 input("Done! Press ENTER to exit.")
