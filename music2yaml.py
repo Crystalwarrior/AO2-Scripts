@@ -1,4 +1,4 @@
-# from tinytag import TinyTag
+from tinytag import TinyTag
 import os
 import sys
 
@@ -13,6 +13,9 @@ if len(sys.argv) > 1:
 droppedFile = None
 if arg != "":
     droppedFile = open(arg, "r")
+
+use_lengths = input(
+    'Analyze song lengths and put them in length:? (y/n)').lower() == 'y'
 
 File = open("music.yaml", "w")
 Err = open("music_errors.txt", "w")
@@ -33,15 +36,18 @@ if droppedFile:
                         File.write('  songs:\n')
                         print("Category: {}".format(line[:-1]))
                         current_category = line[:-1]
-                    # tag = TinyTag.get(line)
-                    # duration = tag.duration
                     duration = -1
-                    File.write('    - name: "{}"\n'.format(current_category + "/" + line))
+                    if use_lengths:
+                        tag = TinyTag.get(line)
+                        duration = tag.duration
+                    File.write(
+                        '    - name: "{}"\n'.format(current_category + "/" + line))
                     File.write('      length: {}\n'.format(duration))
                     print("Name: {} Length: {}".format(line, duration))
                 except:
                     Err.write('Error for {}\n'.format(line))
-                    input("Unable to process song: {}! Press ENTER to continue.".format(line))
+                    input(
+                        "Unable to process song: {}! Press ENTER to continue.".format(line))
         except:
             continue
 else:
@@ -72,10 +78,12 @@ else:
                             current_category = f.name
                             File.write('- category: =={}==\n'.format(f.name))
                             File.write('  songs:\n')
-                        # tag = TinyTag.get(line)
-                        # duration = tag.duration
                         duration = -1
-                        File.write('    - name: "{}"\n'.format(current_category + "/" + song.name))
+                        if use_lengths:
+                            tag = TinyTag.get(song.name)
+                            duration = tag.duration
+                        File.write(
+                            '    - name: "{}"\n'.format(current_category + "/" + song.name))
                         File.write('      length: {}\n'.format(duration))
                         print("Name: {} Length: {}".format(song.name, duration))
 
