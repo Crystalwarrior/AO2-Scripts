@@ -74,12 +74,12 @@ def set_category(category_name):
 def add_song(song_name):
     duration = -1
     print(f'use_lengths is {use_lengths}')
-    if use_lengths:
-        tag = TinyTag.get(song_name)
-        duration = tag.duration
     fname = song_name
     if current_category != "Unsorted":
         fname = current_category + "/" + song_name
+    if use_lengths:
+        tag = TinyTag.get(fname)
+        duration = tag.duration
     File.write(
         '    - name: "{}"\n'.format(fname))
     File.write('      length: {}\n'.format(duration))
