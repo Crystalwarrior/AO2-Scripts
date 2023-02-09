@@ -122,14 +122,14 @@ File.write('number={}\n'.format(emote_number))
 File.write(string)
 
 File.write('\n[SoundN]\n')
-a = 0
-while a < emote_number:
-    a += 1
-    File.write('{} = 0\n'.format(a))
+# a = 0
+# while a < emote_number:
+#     a += 1
+#     File.write('{} = 0\n'.format(a))
 File.write('\n[SoundT]\n')
-a = 0
-while a < emote_number:
-    a += 1
-    File.write('{} = 0\n'.format(a))
+# a = 0
+# while a < emote_number:
+#     a += 1
+#     File.write('{} = 0\n'.format(a))
 
 input("Done! Press ENTER to exit.")

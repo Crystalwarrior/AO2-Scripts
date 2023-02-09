@@ -1,1 +1,1 @@
-for /R %%i in (*.gif) do (ffmpeg.exe -i "%%i" -y -vcodec webp -loop 0 -pix_fmt yuva420p "%%~pni.webp")
+for /R %%i in (*.gif) do (gif2webp.exe -mt -mixed -min_size -f 25 -q 80 "%%i" -o "%%~dpni.webp")
