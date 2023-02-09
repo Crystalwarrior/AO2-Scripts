@@ -23,7 +23,7 @@ if arg == "":
 droppedFile = open(arg, "r")
 
 reverse = input(
-    'Rename numbered buttons back to their emotes?').lower() == 'y'
+    'Rename numbered buttons back to their emotes? (y/n): ').lower() == 'y'
 state = input('Input state (on or off): ').lower()
 
 for line in droppedFile.readlines():
