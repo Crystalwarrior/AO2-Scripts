@@ -1,5 +1,4 @@
 import os
-import sys
 
 def is_int(s):
     try:
@@ -15,7 +14,8 @@ to_numb = 0
 from_numb = int(input("From where: "))
 raise_numb = int(input("With how many: "))
 
-for button in reversed(os.listdir()):
+dir = sorted(os.listdir(), key=len)
+for button in reversed(dir):
     if button[0:6] == "button" and is_int(button[6]):
         if button[-5] == "f":
             to_numb = -8

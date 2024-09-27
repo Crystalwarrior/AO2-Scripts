@@ -60,8 +60,7 @@ if use_lengths:
 
 File = open("music.yaml", "w")
 Err = open("music_errors.txt", "w")
-File.write('- replace: False #Whether or not to use this music list exclusively instead of trying to add it on top of server music\n')
-File.write('  use_unique_folder: True #If true, this music will be contained entirely within its own folder e.g. base/music/<yaml name>/*.mp3\n')
+File.write('- use_unique_folder: True #If true, this music will be contained entirely within its own folder e.g. base/music/<yaml name>/*.mp3\n')
 
 
 def set_category(category_name):
