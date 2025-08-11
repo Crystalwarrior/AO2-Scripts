@@ -1,0 +1,22 @@
+﻿/evidence_add "Bar Counter" "<owner=all>
+A long, curved bar stretches across the room, fronted by alternating colored panels glowing softly in green, orange, red, and purple. The bar surface is cluttered with glassware, unlit candles, and scattered napkins.
+" DRIO/Bar/Counter.png%
+/evidence_add "Stools" "<owner=all>
+A long row of aged bar stools, each with a worn leather cushion and rusting metal base. Some are tilted slightly, with only a few still facing the counter." DRIO/Bar/Stools.png%
+/evidence_add "Mirror Wall" "<owner=all>
+A wide, cracked mirror lines the wall behind the bar, reflecting distorted images of glowing bottles and dark corners. Wooden shelving holds a sparse, dusty collection of drinks and decor, including some glassware still upright. A few warm lights behind the shelves provide a hazy glow.
+" DRIO/Bar/MirrorWall.png%
+/evidence_add "Lounge Area" "<owner=all>
+A few tables remain standing in the corner of the room near tribal-patterned pillars. Scattered papers, menus, and broken glass litter the surfaces. One bottle still stands upright, next to a mold-covered ashtray.
+" DRIO/Bar/LoungeArea.png%
+/evidence_add "Ceiling Fixture" "<owner=all>
+A large retro light fixture embedded in the ceiling. It glows faintly blue from the center over the lounge area.
+" DRIO/Bar/CeilingFixture.png%
+/evidence_add "Drinks" "<owner=all>
+There’s a bunch of alcoholic beverages to choose from!
+Spirits: Old Forester 86 Proof (Bourbon), Gordon’s London Dry Gin, Canadian Club 6-Year Whisky, Seagram’s V.O. Canadian Whisky, Bacardí Carta Blanca (White Rum), Beefeater London Dry Gin, J&B Rare Scotch Whisky, Courvoisier V.S. Cognac, Green Chartreuse (Herbal Liqueur), Cointreau (Orange Liqueur)
+Cocktails: Old Fashioned, Sidecar, Manhattan, Gimlet, Singapore Sling, Whiskey Sour, Sazerac, Rusty Nail, Pink Lady, Tom Collins
+There’s also normal Wine and Beer if you’re a basic baby.
+" DRIO/Bar/Drinks.png%
+/evidence_add "Camera" "<owner=all>
+It's a surveillance camera. It silently overlooks the room..." DD/Camera2.png%
