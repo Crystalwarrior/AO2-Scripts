@@ -19,8 +19,10 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$InputFile,
     
+    [Parameter(Mandatory=$true)]
     [string]$OutputFile,
-
+    
+    [Parameter(Mandatory=$true)]
     [string]$Pos
 )
 
@@ -38,12 +40,12 @@ $currentEntry = @{Image=$null; Name=$null; Desc=[System.Collections.Generic.List
 function Process-CurrentEntry {
     if ($currentEntry.Image -and $currentEntry.Name) {
         $desc = $currentEntry.Desc -join "`n"
-        $escapedDesc = $desc.Replace('"', '\"')
+        $escapedDesc = $desc.Replace('"', '\"').Trim()
         if ($OutputFile) {
-            $entry = "/evidence_add `"$($currentEntry.Name)`" `"<owner=$Pos>`n$escapedDesc`" $($currentEntry.Image)%"
+            $entry = "/evidence_add `"$($currentEntry.Name)`" `"<owner=$Pos>`n$escapedDesc`" `"$($currentEntry.Image)`"%"
         }
         else {
-            $entry = "/evidence_add `"$($currentEntry.Name)`" `"$escapedDesc`" $($currentEntry.Image)%"
+            $entry = "/evidence_add `"$($currentEntry.Name)`" `"$escapedDesc`" `"$($currentEntry.Image)`"%"
         }
         $evidenceEntries.Add($entry)
     }
