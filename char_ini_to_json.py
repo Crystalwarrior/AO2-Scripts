@@ -14,7 +14,7 @@ def parse_char_ini(char_ini_path):
     with open(char_ini_path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith("#"):
+            if not line:
                 continue
             if line.startswith("[") and line.endswith("]"):
                 section = line[1:-1]
@@ -31,10 +31,9 @@ def parse_char_ini(char_ini_path):
 
     sprite_names = []
     for i in sorted(emotions.keys()):
-        parts = emotions[i].split("#-#")
-        if len(parts) >= 2:
-            sprite_name = parts[1].split("#")[0].strip()
-            sprite_names.append(sprite_name)
+        parts = emotions[i].split("#")
+        sprite_name = parts[1].split("#")[0].strip()
+        sprite_names.append(sprite_name)
 
     return config, sprite_names
 
